@@ -11,8 +11,8 @@ let port = 9000;
 
 app.use(parser.json())
   .use(parser.urlencoded({extended: true}))
-  .use(express.static(path.resolve(__dirname, '../client')))
   .use('/main', router)
+  .use(express.static(path.resolve(__dirname, '../client/src')))
   .get('/*', function (req, res) {
     console.log(req.body);
     res.send('wildcard endpoint ==== ')
