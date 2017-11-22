@@ -5,7 +5,20 @@ import { handleSignup } from '../actions/handleSignup.jsx'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { FormGroup } from 'react-bootstrap'
+import FIREBASE_API from '../../config.js'
 
+const firebase = require("firebase");
+console.log('API Key', FIREBASE_API.FIREBASE_API)
+// Initialize Firebase
+// TODO: Replace with your project's customized code snippet
+var config = {
+  apiKey: FIREBASE_API.FIREBASE_API,
+  authDomain: "xtrememessenger.firebaseapp.com",
+  databaseURL: "https://xtrememessenger.firebaseio.com",
+  projectId: "xtrememessenger",
+  storageBucket: "xtrememessenger.appspot.com"
+};
+firebase.initializeApp(config);
 
 class Signup extends Component {
   constructor(props) {
@@ -31,13 +44,25 @@ class Signup extends Component {
 
   async handleClickSubmit () {
     console.log('this is redux state before submit ===== ',this.props)
+    let context = this;
     // console.log('state ', this.state)
     await this.props.handleSignup(this.state);
     console.log('this is redux state after submit ===== ', this.props)
+    firebase.auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(function (user) {
+      const newUser = {
+        
+        email: context.state.email,
+        password: context.state.password,
+        name: context.state.name,
+        id: user.uid
+      }
     // axios.post('/main/signup', this.state)
     //   .then(response => {
     //     console.log('new login request ===== ', response.data)
     //   })
+    })
   }
 
   // handleClickDropDown(name) {
