@@ -1,7 +1,7 @@
 import React from 'react';
 // import Login from './containers/Login.jsx'
-import Signup from './containers/Signup.jsx'
-require('../style.css');
+import Signup from '../containers/Signup.jsx'
+//require('../style.css');
 
 const App = () => (
   <div>
@@ -9,7 +9,7 @@ const App = () => (
     {/* <Login /> */}
     <hr />
     <h2>Signup:</h2>
-    {/* <Signup /> */}
+    <Signup />
   </div>
 );
 
