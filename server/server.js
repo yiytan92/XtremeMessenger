@@ -18,11 +18,11 @@ let port = 9000;
 app.use(parser.json())
   .use(parser.urlencoded({extended: true}))
   .use(express.static(path.resolve(__dirname, '../client/src')))
-app.use(cors({
-  allowedHeaders: 'Content-Type,Authorization',
-  methods: ['GET, POST, PUT, DELETE, OPTIONS'],
-}));
-//app.use(cors(corsOptions));
+// app.use(cors({
+//   allowedHeaders: 'Content-Type,Authorization',
+//   methods: ['GET, POST, PUT, DELETE, OPTIONS'],
+// }));
+app.use(cors(corsOptions));
 app.use('/main', router)
   .get('/*', function (req, res) {
     console.log(req.body);
